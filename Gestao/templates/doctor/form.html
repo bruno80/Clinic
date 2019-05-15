@@ -1,0 +1,96 @@
+{% extends "base.html" %} {% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Novo Cliente
+            </header>
+            <div class="panel-body">
+                <div class="form">
+                    <form action="/atendimento/medico/form" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group ">
+                            <label for="{{form.nome.id_for_label}}" class="control-label col-lg-2">{{form.nome.label}}
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-lg-10">
+                                {{form.nome}}
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="{{form.crm.id_for_label}}" class="control-label col-lg-2">{{form.crm.label}}
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-lg-10">
+                                {{form.crm}}
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                                <label for="{{form.especalidade.id_for_label}}" class="control-label col-lg-2">{{form.especalidade.label}}
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-lg-10">
+                                {{form.especalidade}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <input class="btn btn-primary" type="submit" value="Salvar">
+                                <button class="btn btn-primary" type="button">Cancel</button>
+                              
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Novo Cliente
+            </header>
+            <div class="panel-body">
+                <div class="form">
+                    <form action="/atendimento/medico/form" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group ">
+                            <label for="cname" class="control-label col-lg-2">NOME
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-lg-10">
+                                {{form.nome}}
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="cemail" class="control-label col-lg-2">CRM
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-lg-10">
+                                {form.crm}
+                                <rm></rm>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="curl" class="control-label col-lg-2">ESPECIALIDADE</label>
+                            <div class="col-lg-10">
+                                {{form.especialidade}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                                <button class="btn btn-default" type="button">Cancel</button>
+                                <input type="submit" value="Vai...">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

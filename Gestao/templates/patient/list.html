@@ -1,0 +1,37 @@
+{% extends "base.html" %}  
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <table class="table">
+            <h1>Listagem de clientes</h1>
+            <thead class="thead-dark">
+                <tr>
+                    <th>NOME</th>
+                    <th>DATA NASCIMENTO</th>
+                    <th>CPF</th>
+                    <th>SEXO</th>
+                    <th>DETALHE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td>{{cliente.nome}}</td>
+                    <td>{{cliente.dt_nasc | date:"d/m/Y"}}</td>
+                    <td>{{cliente.cpf}}</td>
+                    <td>{{cliente.sexo}}</td>
+                    <td><a href="/atendimento/cliente/{{cliente.id}}" /> Ver </td>
+                </tr>
+                {% endfor%}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td id="rodape">
+                        <p>Foram encontrados {{clientes | length}} Cadastrado!!</p>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+{%endblock%}
