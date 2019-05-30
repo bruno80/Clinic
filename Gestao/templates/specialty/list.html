@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <h1>Listagem de Especialidades</h1>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>NOME</th>
+                        <th>DESCRIÇÃO</th>
+                        <th>
+                            <div class="button home_button">
+                                <a href="/gestao/specialty/new/">
+                                    <span>Novo</span>
+                                    <span>Cadastrar!</span>
+                                </a>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for specialty in specialtys %}
+                    <tr>
+                        <td>{{specialty.name}}</td>
+                        <td>{{specialty.description}}</td>
+                        <td>
+                            <a href="/gestao/specialty/delete/{{specialty.id}}/">
+                                <button type="button" class="btn btn-dark">Excluir</button>
+                            </a>
+                            |
+                            <a href="/gestao/specialty/edit/{{specialty.id}}/">
+                                <button type="button" class="btn btn-dark">Editar</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td id="rodape" colspan="3">
+                            <p>Foram encontrados {{specialtys | length}} Especialidades(s) Cadastrada(s)!!</p>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

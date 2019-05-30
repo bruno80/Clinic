@@ -1,35 +1,101 @@
-{% extends "base.html" %}  
-{% block content %}
-<div class="row">
-    <div class="col-12">
-        <table class="table">
-            <h1>Listagem de Medicos</h1>
-            <thead class="thead-dark">
-                <tr>
-                    <th>NOME</th>
-                    <th>CRM</th>
-                    <th>ESPECIALIDADE</th>
-                    <th>DETALHE</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for medico in medicos %}
-                <tr>
-                    <td>{{medico.nome}}</td>
-                    <td>{{medico.crm}}</td>
-                    <td>{{medico.especalidade}}</td>
-                    <td><a href="/atendimento/medico/{{medico.id}}" /> Ver </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td id="rodape" colspan="3">
-                        <p>Foram encontrados {{medicos | length}} Cadastrado!!</p>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+{% extends "base.html" %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <h1>Listagem de Medicos</h1>
+                <form action="/gestao/doctors/" method="post">
+                    {% csrf_token %}
+                    <div>
+                        <h4 for="inputState">Ordenação</h4>
+                        <select id="inputState" name="select" style="width:230px; " class="form-control">
+                            <option value="name">Nome</option>
+                            <option value="crm">CRM</option>
+                            <option value="date_of_birth">Data de Nascimento</option>
+                            <option value="specialty">Especialidade</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark button-search  ">Salvar</button>
+                    </div>
+                </form>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>NOME</th>
+                        <th>CRM</th>
+                        <th>DATA DE NASCIMENTO</th>
+                        <th>ESPECIALIDADE</th>
+                        <th style="width: 194px;">
+                            <div class="button home_button">
+                                <a href="/gestao/doctor/new/">
+                                    <span>Novo</span>
+                                    <span>Cadastrar!</span>
+                                </a>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doctor in doctors %}
+                    <tr>
+                        <td>{{doctor.name}}</td>
+                        <td>{{doctor.crm}}</td>
+                        <td>{{doctor.date_of_birth}}</td>
+                        <td>{{doctor.specialty}}</td>
+                        <td>
+                            <a>
+                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" data-whatever="{{doctor.id}}">Excluir</button>
+                                |
+                                <a href="/gestao/doctor/edit/{{doctor.id}}/">
+                                    <button type="button" class="btn btn-dark">Editar</button>
+                                </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td id="rodape" colspan="3">
+                            <p>Foram encontrados {{doctors | length}} Médico(s) Cadastrado(s)!!</p>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </div>
-{%endblock%}
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Deseja realmente apagar?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                        <button type="button" class="btn btn-dark">Sim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block scripts %}
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Botão que acionou o modal
+        var recipient = button.data('whatever') // Extrair informações dos atributos data- *
+        // Se necessário, você pode iniciar uma solicitação AJAX aqui (e depois fazer a atualização em um retorno de chamada).
+        // Atualize o conteúdo do modal. Vamos usar o jQuery aqui, mas você pode usar uma biblioteca de ligação de dados ou outros métodos.
+        var modal = $(this)
+        modal.find('.modal-footer button').val(recipient)
+    })
+</script> {% endblock %}

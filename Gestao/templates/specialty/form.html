@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <header class="panel-heading">
+                <h1>Cadastrar especialidade</h1>
+            </header>
+            <div class="panel-body">
+                <form class="form-validate" action="/gestao/specialty/new/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{for.name.id_for_label}}">Nome</label>
+                        <div>
+                            {{form.name}} {% for error in form.name.errors %}
+                            <label for="{{for.name.id_for_label}}" class="error">{{error}}</label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{for.description.id_for_label}}">Descrição</label>
+                        <div>
+                            {{form.description}} {% for error in form.description.errors %}
+                            <label for="{{for.description.id_for_label}}" class="error">{{error}}</label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <button type="submit" class="btn btn-dark">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

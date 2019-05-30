@@ -1,37 +1,68 @@
-{% extends "base.html" %}  
-{% block content %}
-<div class="row">
-    <div class="col-12">
-        <table class="table">
-            <h1>Listagem de clientes</h1>
-            <thead class="thead-dark">
-                <tr>
-                    <th>NOME</th>
-                    <th>DATA NASCIMENTO</th>
-                    <th>CPF</th>
-                    <th>SEXO</th>
-                    <th>DETALHE</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for cliente in clientes %}
-                <tr>
-                    <td>{{cliente.nome}}</td>
-                    <td>{{cliente.dt_nasc | date:"d/m/Y"}}</td>
-                    <td>{{cliente.cpf}}</td>
-                    <td>{{cliente.sexo}}</td>
-                    <td><a href="/atendimento/cliente/{{cliente.id}}" /> Ver </td>
-                </tr>
-                {% endfor%}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td id="rodape">
-                        <p>Foram encontrados {{clientes | length}} Cadastrado!!</p>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+{% extends "base.html" %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <h1>Listagem de Pacientes</h1>
+                <form method="POST" action="/gestao/patients/">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" name="name" placeholder="Digite Nome do Paciente">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <button type="submit" class="btn btn-dark button-search">Pesquisar</button>
+                        </div>
+                    </div>
+
+                </form>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>NOME</th>
+                        <th>CPF</th>
+                        <th>DATA NASCIMENTO</th>
+                        <th>MÉDICO</th>
+                        <th style="width: 194px;">
+                            <div class="button home_button">
+                                <a href="/gestao/patient/new/">
+                                    <span>Novo</span>
+                                    <span>Cadastrar!</span>
+                                </a>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                    <tr>
+                        <td>{{patient.name}}</td>
+                        <td>{{patient.cpf}}</td>
+                        <td>{{patient.date_of_birth | date:"d/m/Y"}}</td>
+                        <td>{{patient.doctor}}</td>
+                        <td>
+                            <a href="/gestao/patient/delete/{{patient.id}}/">
+                                <button type="button" class="btn btn-dark">Excluir</button>
+                            </a>
+                            |
+                            <a href="/gestao/patient/edit/{{patient.id}}/">
+                                <button type="button" class="btn btn-dark">Editar</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor%}
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td id="rodape" colspan="3">
+                            <p>Foram encontrados {{patients | length}} Paciente(s) Cadastrado(s)!!</p>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </div>
 {%endblock%}

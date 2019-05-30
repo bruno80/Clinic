@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <header class="panel-heading">
+                <h1>Formulário Médico</h1>
+            </header>
+            <div class="panel-body">
+                <form class="form-validate" action="/gestao/patient/edit/{{patient.id}}/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{for.name.id_for_label}}">Nome</label>
+                        <div>
+                            {{form.name}} {% for error in form.name.errors %}
+                            <label for="{{for.name.id_for_label}}" class="error">{{error}}</label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{for.cpf.id_for_label}}">CPF</label>
+                        <div>
+                            {{form.cpf}} {% for error in form.cpf.errors %}
+                            <label for="{{for.cpf.id_for_label}}" class="error">{{error}}</label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{for.date_of_birth.id_for_label}}">Data de Nascimento</label>
+                        <div>
+                            {{form.date_of_birth}} {% for error in form.date_of_birth.errors %}
+                            <label for="{{for.date_of_birth.id_for_label}}" class="error">{{error}}</label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{for.doctor.id_for_label}}">Médico</label>
+                        <div>
+                            {{form.doctor}} {% for error in form.doctor.errors %}
+                            <label for="{{for.doctor.id_for_label}}" class="error">{{error}}</label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <button type="submit" class="btn btn-dark">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
