@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from . models import Doctor, Specialty, Patient
 from django.http import HttpResponse
 from . forms import FormDoctor, FormPatient, FormSpecialty
+from django.db.models import Count
 
 def home(request):
-    return render (request, 'home.html', {})
-
+    visitante = request.session.get('visitante', 0)
+    request.session['visitante'] = visitante+1
+    return render (request, 'home.html')
 
 def doctor_list(request):
     doctors = Doctor.objects.all()
