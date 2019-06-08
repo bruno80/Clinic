@@ -77,12 +77,10 @@
                 </button>
             </div>
             <div class="modal-footer">
-                <form action="" method="POST">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Não</button>
+                <form id="confirm" action="" method="POST">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-                        <button type="button" class="btn btn-dark">Sim</button>
-                    </div>
+                        <button type="submit" class="btn btn">Sim</button>
                 </form>
             </div>
         </div>
@@ -96,6 +94,6 @@
         // Se necessário, você pode iniciar uma solicitação AJAX aqui (e depois fazer a atualização em um retorno de chamada).
         // Atualize o conteúdo do modal. Vamos usar o jQuery aqui, mas você pode usar uma biblioteca de ligação de dados ou outros métodos.
         var modal = $(this)
-        modal.find('.modal-footer button').val(recipient)
+        modal.find('#confirm').attr('action', '/gestao/doctor/delete/' + recipient + '/')
     })
 </script> {% endblock %}
