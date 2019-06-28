@@ -3,6 +3,7 @@ from . models import Doctor, Specialty, Patient
 from django.http import HttpResponse
 from . forms import FormDoctor, FormPatient, FormSpecialty
 from django.db.models import Count
+from django.contrib import messages
 
 def home(request):
     visitante = request.session.get('visitante', 0)
@@ -41,7 +42,8 @@ def doctor_new(request):
     if request.method == 'POST':
         form = FormDoctor(request.POST)
         if (form.is_valid()):
-            form.save()
+            doctor = form.save()
+            messages.success(request, 'O Médico ' + doctor.name + ' foi adicionado com sucesso !')
             return redirect('/gestao/doctor/')
         else:
             return render(request, 'doctor/form.html', {'form':form})
@@ -55,6 +57,7 @@ def patient_new(request):
         if (form.is_valid()):
             form.save()
             return redirect('/gestao/patient/')
+
         else:
             return render(request, 'patient/form.html', {'form':form})
     else:

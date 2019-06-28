@@ -4,6 +4,15 @@
         <div class="col-12">
             <table class="table">
                 <h1>Listagem de Medicos</h1>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
                 <form action="/gestao/doctors/" method="post">
                     {% csrf_token %}
                     <div>
@@ -77,10 +86,10 @@
                 </button>
             </div>
             <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">Não</button>
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Não</button>
                 <form id="confirm" action="" method="POST">
                     {% csrf_token %}
-                        <button type="submit" class="btn btn">Sim</button>
+                    <button type="submit" class="btn btn">Sim</button>
                 </form>
             </div>
         </div>

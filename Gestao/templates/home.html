@@ -37,19 +37,15 @@
 								<div class="col">
 									<div class="header_top_content d-flex flex-row align-items-center justify-content-start">
 										<div class="logo">
-											<a href="/gestao">clinica<span>+</span></a>
+											<a href="/gestao">clinica
+												<span>+</span>
+											</a>
 										</div>
 										<div class="header_top_extra d-flex flex-row align-items-center justify-content-start ml-auto">
 											<div class="header_top_nav">
 												<ul class="d-flex flex-row align-items-center justify-content-start">
 													<li>
-														<a>Help Desk</a>
-													</li>
-													<li>
-														<a>Emergency Services</a>
-													</li>
-													<li>
-														<a>Appointment</a>
+														<a>Seja Bem-Vindo {{ request.user.username }} !</a>
 													</li>
 												</ul>
 											</div>
@@ -86,6 +82,12 @@
 														</li>
 														<li>
 															<a href="/gestao/specialty/">Especialidades</a>
+														</li>
+														<li>
+															<a href="/accounts/login/">Login</a>
+														</li>
+														<li>
+															<a href="/accounts/logout/">Logout</a>
 														</li>
 													</ul>
 												</nav>
